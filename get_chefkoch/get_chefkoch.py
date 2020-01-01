@@ -29,11 +29,12 @@ class chefkoch:
         recipe.rating = float(recibe_json["aggregateRating"]["ratingValue"])
         recipe.category = recibe_json["recipeCategory"]
         recipe.published = recibe_json["datePublished"]
-        #recipe.cooktime = recibe_json["cookTime"]
+        recipe.cooktime = recibe_json["prepTime"]
         recipe.autor = recibe_json["author"]["name"]
         recipe.reviews = recibe_json["aggregateRating"]["reviewCount"]
         recipe.Yield = recibe_json["recipeYield"]
         recipe.id = recipe_id
+        recibe.calories = recibe_json["nutrition"]["calories"]
         return recipe
     def search(self,search):
         url = "https://www.chefkoch.de/rs/s0/"+search+"/Rezept.html"
