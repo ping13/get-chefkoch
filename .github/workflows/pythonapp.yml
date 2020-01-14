@@ -1,4 +1,4 @@
-name: get chefkoch
+name: test get chefkoch
 
 on: [push]
 
