@@ -1,4 +1,4 @@
-name: get-chefkoch
+name: publish get-chefkoch
 
 on:
   release:
