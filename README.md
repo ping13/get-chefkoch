@@ -2,7 +2,7 @@
 <a href="http://pepy.tech/count/get-chefkoch"><img src="http://pepy.tech/badge/get-chefkoch"></a> <a href="https://badge.fury.io/py/get-chefkoch"><img src="https://badge.fury.io/py/get-chefkoch.svg" alt="PyPI version" height="18"></a> <a href="https://github.com/olzeug/get_chefkoch/blob/master/LICENSE"><img src="https://img.shields.io/github/license/olzeug/get_chefkoch.svg"></a><br>
 A Python Library with which you can get data from Chefkoch.
 
-#Example:
+# Example:
 --------
 
 ```python
@@ -20,30 +20,30 @@ c = chefkoch()
 print(c.search("Hot Dog", limit=5)[0].id)
 ```
 
-#Recipe-Class Parameters:
+# Recipe-Class Parameters:
 ------------------------
-name
-description
-image
-ingredients
-rating
-category
-published
-cooktime
-autor
-reviews
-_yield
-id
-url
+     name
+     description
+     image
+     ingredients
+     rating
+     category
+     published
+     cooktime
+     autor
+     reviews
+     _yield
+     id
+     url
 
-#Features:
+# Features:
 --------
 
 - Query the recipe of the day
 - Search for specific recipe
 - Querying information about a recipe(cooking time, description, ingredients, ...)
 
-#Get it now:
+# Get it now:
 ----------
 
 ```
