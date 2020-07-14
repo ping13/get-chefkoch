@@ -43,6 +43,7 @@ class chefkoch:
         recipe.reviews = recipe_json["aggregateRating"]["reviewCount"]
         recipe.Yield = recipe_json["recipeYield"]
         recipe.id = recipe_id
+        recipe.url = url
         #recipe.calories = recipe_json["nutrition"]["calories"]
         return recipe
 
