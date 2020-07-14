@@ -7,11 +7,12 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 __packages__ = ["get_chefkoch"]
-__keywords__ = ["Chefkoch","python"]
+__keywords__ = ["Chefkoch","get_chefkoch"]
 __requires__ = ["requests","feedparser","bs4","json","lxml"]
 setup(
     name = __project__,
     version = __version__,
+    author = "olzeug",
     description = __description__,
     packages = __packages__,
     keywords = __keywords__,
