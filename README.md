@@ -17,6 +17,9 @@ from get_chefkoch import chefkoch
 
 c = chefkoch()
 print(c.search("Hot Dog", limit=5)[0].id)
+
+for i in c.search("Milk Shake", limit=10, offset=2):
+  print(i._yield)
 ```
 
 # Recipe-Class Parameters:
