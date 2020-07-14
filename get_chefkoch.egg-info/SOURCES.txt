@@ -1,8 +1,0 @@
-setup.cfg
-setup.py
-get_chefkoch/__init__.py
-get_chefkoch/get_chefkoch.py
-get_chefkoch.egg-info/PKG-INFO
-get_chefkoch.egg-info/SOURCES.txt
-get_chefkoch.egg-info/dependency_links.txt
-get_chefkoch.egg-info/top_level.txt

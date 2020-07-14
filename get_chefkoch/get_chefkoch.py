@@ -4,7 +4,7 @@
 import requests,feedparser
 from bs4 import BeautifulSoup
 from json import loads
-class SaveRecipe(object):
+class _SaveRecipe(object):
     def __init__(self):
         pass
 class chefkoch:
@@ -19,7 +19,7 @@ class chefkoch:
 
     def get(self,recipe_id):
         url = "https://www.chefkoch.de/rezepte/"+ str(recipe_id)
-        recipe = SaveRecipe()
+        recipe = _SaveRecipe()
         content = BeautifulSoup(requests.get(url).text, 'lxml')
         recibe_json = loads(content.findAll("script",type="application/ld+json")[1].text)
         recipe.name = recibe_json["name"]
