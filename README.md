@@ -17,7 +17,7 @@ print(recipe.name)
 from get_chefkoch import chefkoch
 
 c = chefkoch()
-print(c.search("Hot Dog").id)
+print(c.search("Hot Dog", limit=5)[0].id)
 ```
 Features:
 --------
