@@ -1,2 +1,4 @@
 /dist
 /get_chefkoch.egg-info
+/test.py
+/get_chefkoch/__pycache__/
