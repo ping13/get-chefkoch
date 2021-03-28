@@ -110,7 +110,7 @@ class Recipe:
         try:
             self.data = json.loads(data)
         except json.decoder.JSONDecodeError:
-            raise ParserError("Parsed section is not json-decodeable.")
+            raise ParserError(f"Parsed section is not json-decodeable.{data}")
         
         self._processData()
         self.gotMeta = True
