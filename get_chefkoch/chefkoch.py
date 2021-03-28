@@ -143,7 +143,7 @@ class Recipe:
     @property
     @recipeParameter
     def ingredients(self) -> list:
-        return self.data['recipeIngredients']
+        return self.data['recipeIngredient']
     
     @property
     @recipeParameter
@@ -235,4 +235,4 @@ class Search:
 
 if __name__ == "__main__":
     r = Recipe(url="https://www.chefkoch.de/rezepte/2378411377118199/Scharfer-Hack-Nudelauflauf.html")
-    print(r.image)
+    print(r.name)
