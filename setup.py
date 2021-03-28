@@ -8,7 +8,7 @@ with open("README.md", "r") as fh:
 
 __packages__ = ["get_chefkoch"]
 __keywords__ = ["Chefkoch","get_chefkoch"]
-__requires__ = ["requests","feedparser","bs4"]
+__requires__ = ["requests","feedparser","beautifulsoup4"]
 
 setup(
     name = __project__,
