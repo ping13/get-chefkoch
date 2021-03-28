@@ -29,9 +29,10 @@ class Recipe:
         if url != None and not isinstance(url, str):
             raise TypeError("Invalid argument type for 'url'.")
         
-        hostname = re.search('(?:http.*://)?(?P<host>[^:/ ]+)?', url).group('host')
-        if "chefkoch" not in hostname:
-            raise InvalidUrl("Url does not look like a 'Chefkoch' url.")
+        if url != None:
+            hostname = re.search('(?:http.*://)?(?P<host>[^:/ ]+)?', url).group('host')
+            if "chefkoch" not in hostname:
+                raise InvalidUrl("Url does not look like a 'Chefkoch' url.")
         
         if id != None and not isinstance(id, str):
             raise TypeError("Invalid argument type for 'id'.")
@@ -90,6 +91,9 @@ class Recipe:
             
         elif self._id:
             url = self._baseurl + "rezepte/" + self._id
+        
+        else:
+            raise ArgumentError("Neither argument for 'id' nor for 'url' found.")
         
         req = requests.get(url)
         req.raise_for_status()
