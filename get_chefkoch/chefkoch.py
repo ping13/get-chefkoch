@@ -116,6 +116,9 @@ class Recipe:
         for timeKey in timeKeys:
             if timeKey in self.data:
                 self.data[timeKey] = self._durationToTimeDelta(self.data[timeKey])
+        
+        if "datePublished" in self.data:            
+            self.data["datePublished"] = datetime.strptime(self.data["datePublished"], "%Y-%m-%d")
        
     @property
     @recipeParameter
@@ -146,12 +149,6 @@ class Recipe:
     @recipeParameter
     def category(self) -> str:
         return self.data['recipeCategory']
-    
-    @property
-    @recipeParameter
-    def published(self) -> datetime:
-        d = datetime.strptime(self.data["datePublished"], "%Y-%m-%d")
-        return d
     
     @property
     @recipeParameter
