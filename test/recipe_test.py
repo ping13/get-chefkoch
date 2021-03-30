@@ -4,6 +4,7 @@ from get_chefkoch import Recipe, exceptions
 from datetime import timedelta
 
 r = Recipe(url="https://www.chefkoch.de/rezepte/2378411377118199/Scharfer-Hack-Nudelauflauf.html")
+r2 = Recipe(id="2378411377118199")
 
 def test_invalid_url():
     with pytest.raises(exceptions.InvalidUrl) as e_info:
@@ -21,12 +22,14 @@ def test_invalid_argument_type():
         
 def test_getMeta():
     r.getMeta()
+    r2.getMeta()
         
 def test__str__type():
     assert type(r.__str__()) is str
     
 def test__repr__type():
     assert type(r.__repr__()) is str
+    assert type(r2.__repr__()) is str
     
 def test_durationToTimeDelta():
     duration = "P0DT0H25M"
