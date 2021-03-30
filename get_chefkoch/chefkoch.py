@@ -53,7 +53,7 @@ class Recipe:
         if self._url:
             args.append(f"url='{self._url}'")
         if self._id:
-            args.appned(f"url='{self._id}'")
+            args.append(f"url='{self._id}'")
         return "{}({})".format(self.__class__.__qualname__,', '.join(args))
     
     def _durationToTimeDelta(self, duration: str) -> timedelta:
