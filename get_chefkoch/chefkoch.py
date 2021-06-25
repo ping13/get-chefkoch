@@ -12,8 +12,9 @@ import json
 import re
 
 def recipeParameter(func):
+    """ Internal decorator for all recipe parameters. """
     def wrapper(self):
-        if not self.gotMeta:
+        if not self._gotMeta:
             self.getMeta()
         try:
             return func(self)
@@ -23,6 +24,13 @@ def recipeParameter(func):
     return wrapper
 
 class Recipe:
+    """
+    The Recipe class represents a chefkoch recipe.
+    Attributes:
+        url (str): The url of the recipe.
+        id (str): The unique id of the recipe.
+        
+    """
     def __init__(self, url: Union[str, None] = None, id: Union[str, None] = None) -> None:
         self._baseurl = "https://www.chefkoch.de/"
         
@@ -42,7 +50,7 @@ class Recipe:
         
         self._id = id
         self._url = url
-        self.gotMeta = False
+        self._gotMeta = False
         self.data = {}
     
     def __str__(self) -> str:
@@ -57,6 +65,9 @@ class Recipe:
         return "{}({})".format(self.__class__.__qualname__,', '.join(args))
     
     def _durationToTimeDelta(self, duration: str) -> timedelta:
+        """
+        Is called to generate a timedelta object from the chefkoch duration.
+        """
         if isinstance(duration, timedelta):
             return duration
         
@@ -86,6 +97,9 @@ class Recipe:
         return timedelta(**e)
     
     def getMeta(self) -> None:
+        """
+        Called up as soon as recipe information is retrieved.
+        """
         if self._url:
             url = self._url
             
@@ -114,9 +128,12 @@ class Recipe:
             raise ParserError(f"Parsed section is not json-decodeable.")
         
         self._processData()
-        self.gotMeta = True
+        self._gotMeta = True
         
     def _processData(self) -> None:
+        """
+        Called to adjust recipe parameters.
+        """
         timeKeys = ['prepTime', 'totalTime', 'cookTime']
         for timeKey in timeKeys:
             if timeKey in self.data:
@@ -128,55 +145,71 @@ class Recipe:
     @property
     @recipeParameter
     def name(self) -> str:
+        """ Returns the name of the recipe. """
         return self.data['name']
     
     @property
     @recipeParameter
     def id(self) -> str:
+        """ Returns the unique Id of the recipe. """
         return self._url.split("/")[4]
     
     @property
     @recipeParameter
     def description(self) -> str:
+        """ Returns a short description of the recipe. """
         return self.data['description']
     
     @property
     @recipeParameter
     def image(self) -> str:
+        """ Returns an url for an image. """
         return self.data['image']
     
     @property
     @recipeParameter
     def ingredients(self) -> list:
+        """ Returns a list of strings with the ingredients. """
         return self.data['recipeIngredient']
     
     @property
     @recipeParameter
     def category(self) -> str:
+        """ Returns the category of the recipe. """
         return self.data['recipeCategory']
     
     @property
     @recipeParameter
     def prepTime(self) -> timedelta:
+        """ Returns the preparation time if available. """
         d = self.data['prepTime']
         return self._durationToTimeDelta(d)
     
     @property
     @recipeParameter
     def totalTime(self) -> timedelta:
+        """ Returns the total duration. """
         d = self.data['totalTime']
         return self._durationToTimeDelta(d)
     
     @property
     @recipeParameter
     def cookTime(self) -> timedelta:
+        """ Returns the cooking time if available. """
         d = self.data['cookTime']
         return self._durationToTimeDelta(d)
     
     def data_dump(self) -> dict:
+        """ Returns all information received from chefkoch. """
         return self.data
     
 class Search:
+    """
+    The Search class handles everything for searching.
+    Attributes:
+        q (str): The optional search query.
+        
+    """
     def __init__(self, q: Union[str, None]=None) -> None:
         self._baseurl = "https://www.chefkoch.de/"
         self.q = q
@@ -189,10 +222,19 @@ class Search:
         return "{}({})".format(self.__class__.__qualname__,', '.join(args))
     
     def _argsToUrlParams(self, **args) -> str:
+        """ Converts dictory parameters to url parameters. """
         argsString = [key+"="+str(arg) for key,arg in args.items()]
         return "&".join(argsString)
     
     def recipes(self, q: Union[str, None]=None, offset: int=0, limit: int=-1) -> List[Recipe]:
+        """
+        Search by recipe name.
+        Attributes:
+            q (str): The optional search query.
+            offset (int): Define an offset.
+            limit (int): Define a limit.
+            
+        """
         if q is not None:
             self.q = q
         
@@ -223,21 +265,23 @@ class Search:
         
         
     def suggestions(self, q: Union[str, None]=None, **args) -> dict:
+        """
+        Use the auto-complete function from Chefkoch.
+        Attributes:
+            q (str): The optional search query.
+
+        """
         if q is not None:
             self.q = q
         
         args = "&" + self._argsToUrlParams(**args)
-        req = requests.get(self._baseurl+f"api/v2/search-suggestions/combined?t={self.q}{args}")
+        req = requests.get(self._baseurl + f"api/v2/search-suggestions/combined?t={self.q}{args}")
         req.raise_for_status()
         return req.json()
     
     def recipeOfTheDay(self) -> Recipe:
+        """ Returns the recipe of the day as Recipe class. """
         import feedparser
-        feed = feedparser.parse(self._baseurl+"rss/rezept-des-tages.php")
+        feed = feedparser.parse(self._baseurl + "rss/rezept-des-tages.php")
         url = feed['entries'][0]['link']
         return Recipe(url=url)
-
-
-if __name__ == "__main__":
-    r = Recipe(url="https://www.chefkoch.de/rezepte/2378411377118199/Scharfer-Hack-Nudelauflauf.html")
-    print(r.name)
