@@ -122,8 +122,6 @@ class Recipe:
         
         data = scripts[1].string
         
-        print(data)
-        
         try:
             self.data = json.loads(data)
         except json.decoder.JSONDecodeError:
@@ -258,13 +256,13 @@ class Search:
         
         soup = BeautifulSoup(req.text, 'html.parser')
         
-        data = soup.findAll("script", type="application/ld+json")
+        scripts = soup.findAll("script", type="application/ld+json")
         
-        if len(data) < 2:
+        if len(scripts) < 2:
             raise ParserError("Data section could not be found.")
             
         
-        data = data[1].text
+        data = scripts[1].string
         
         try:
             recipes = json.loads(data)["itemListElement"]
