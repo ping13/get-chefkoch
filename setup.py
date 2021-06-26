@@ -1,6 +1,6 @@
 from setuptools import setup
 __project__ = "get_chefkoch"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __description__ = "Python library to interact with Chefkoch."
 
 with open("README.md", "r") as fh:
