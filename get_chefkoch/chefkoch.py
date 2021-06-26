@@ -120,13 +120,11 @@ class Recipe:
             raise ParserError("Data section could not be found.")
             
         
-        data = scripts[1].text
+        data = scripts[1].string
         
         try:
             self.data = json.loads(data)
         except json.decoder.JSONDecodeError:
-            logging.error(type(scripts[1]))
-            logging.error(scripts[1].string)
             raise ParserError(f"Parsed section is not json-decodeable.")
         
         self._processData()
