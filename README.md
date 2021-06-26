@@ -35,7 +35,7 @@ print(recipe.description)
      category          Recipe category
      prepTime          Preparation time
      totalTime         Total Time
-     cooktime          Cooking time
+     cookTime          Cooking time
      
      Many more parameters are available after calling Recipe().data_dump()
 
