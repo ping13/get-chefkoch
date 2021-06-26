@@ -1,49 +1,48 @@
 # get_chefkoch
 <a href="http://pepy.tech/count/get-chefkoch"><img src="http://pepy.tech/badge/get-chefkoch"></a> <a href="https://badge.fury.io/py/get-chefkoch"><img src="https://badge.fury.io/py/get-chefkoch.svg" alt="PyPI version" height="18"></a> <a href="https://github.com/olzeug/get_chefkoch/blob/master/LICENSE"><img src="https://img.shields.io/github/license/olzeug/get_chefkoch.svg"></a><br>
-A Python Library with which you can get data from Chefkoch.
+Python library to interact with Chefkoch.
 
-# Example:
+## Examples:
 
 ```python
-from get_chefkoch import chefkoch
+from get_chefkoch import Recipe, Search
 
-c = chefkoch()
-recipe = c.daily_recipe()
+s = Search("Apfelstrudel")
+recipe = s.recipes(limit=1)
 print(recipe.name)
+print(recipe.description)
 ```
 
 ```python
-from get_chefkoch import chefkoch
+from get_chefkoch import Recipe, Search
 
-c = chefkoch()
-print(c.search("Hot Dog", limit=5)[0].id)
+recipe = Search().recipeOfTheDay()
 
-for i in c.search("Milk Shake", limit=10, offset=2):
-  print(i._yield)
+print(recipe.name)
+print(recipe.description)
 ```
 
-# Recipe-Class Parameters:
-     name              The recipe name
-     description       The operation description
-     image             The recipe image
-     ingredients       The ingredients
-     rating            The rating of the recipe
-     category          The category
-     published         The Publish Date
-     cooktime          The cooking time
-     autor             The autor
-     reviews           Number of reviews
-     _yield            Number of portions as string
-     id                The unique id created by chefkoch
-     url               The Url
+## Recipe-Class Parameters:
+     name              Name of the recipe
+     id                Unique identification of the recipe
+     description       Description of the recipe
+     image             Url of a beautiful picture of the recipe
+     ingredients       Recipe ingredients
+     category          Recipe category
+     prepTime          Preparation time
+     totalTime         Total Time
+     cooktime          Cooking time
+     
+     Many more parameters are available after calling Recipe().data_dump()
 
-# Features:
+## Features:
 
 - Query the recipe of the day
 - Search for specific recipe
 - Querying information about a recipe(cooking time, description, ingredients, ...)
+- Use the automatic suggestions from Chefkoch
 
-# Get it now:
+## Get it now:
 
 ```
 pip install get-chefkoch
