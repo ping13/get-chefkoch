@@ -62,6 +62,7 @@ class Recipe:
             args.append(f"url='{self._url}'")
         if self._id:
             args.append(f"url='{self._id}'")
+
         return "{}({})".format(self.__class__.__qualname__,', '.join(args))
     
     def _durationToTimeDelta(self, duration: str) -> timedelta:
@@ -152,6 +153,9 @@ class Recipe:
     @recipeParameter
     def id(self) -> str:
         """ Returns the unique Id of the recipe. """
+        if self._id:
+            return self._id
+        
         return self._url.split("/")[4]
     
     @property
@@ -235,9 +239,18 @@ class Search:
             limit (int): Define a limit.
             
         """
-        if q is not None:
+        if q:
             self.q = q
-        
+            
+        if not self.q:
+            raise AttributeError("No query argument set.")
+
+        if not isinstance(offset, int):
+            raise TypeError("Invalid argument type for 'offset'.")
+            
+        if not isinstance(limit, int):
+            raise TypeError("Invalid argument type for 'limit'.")
+
         req = requests.get(self._baseurl+f'rs/s0/{self.q}/Rezepte.html')
         req.raise_for_status()
         
@@ -258,7 +271,7 @@ class Search:
         
         result = list()
         
-        for recipe in recipes[offset:limit]:
+        for recipe in recipes[offset:offset+limit]:
             result.append(Recipe(url=recipe['url']))
             
         return result
@@ -271,8 +284,11 @@ class Search:
             q (str): The optional search query.
 
         """
-        if q is not None:
+        if q:
             self.q = q
+            
+        if not self.q:
+            raise AttributeError("No query argument set.")
         
         args = "&" + self._argsToUrlParams(**args)
         req = requests.get(self._baseurl + f"api/v2/search-suggestions/combined?t={self.q}{args}")
