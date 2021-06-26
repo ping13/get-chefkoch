@@ -114,18 +114,18 @@ class Recipe:
         req.raise_for_status()
         soup = BeautifulSoup(req.text, 'html.parser')
         
-        data = soup.findAll("script", type="application/ld+json")
+        scripts = soup.findAll("script", type="application/ld+json")
         
-        if len(data) < 2:
+        if len(scripts) < 2:
             raise ParserError("Data section could not be found.")
             
         
-        data = data[1].text
+        data = scripts[1].text
         
         try:
             self.data = json.loads(data)
         except json.decoder.JSONDecodeError:
-            logging.error(data)
+            logging.error(scripts)
             raise ParserError(f"Parsed section is not json-decodeable.")
         
         self._processData()
