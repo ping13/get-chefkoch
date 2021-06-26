@@ -125,7 +125,7 @@ class Recipe:
         try:
             self.data = json.loads(data)
         except json.decoder.JSONDecodeError:
-            logging.error(scripts)
+            logging.error(data)
             raise ParserError(f"Parsed section is not json-decodeable.")
         
         self._processData()
