@@ -6,6 +6,12 @@
 
 Python library to interact with Chefkoch.
 
+## Installation & Documentation
+```
+pip install get-chefkoch
+```
+[Documentation](https://get-chefkoch.readthedocs.io/) can be found at Read the Docs.
+
 ## Examples:
 
 ```python
@@ -45,9 +51,3 @@ print(recipe.description)
 - Search for specific recipe
 - Querying information about a recipe(cooking time, description, ingredients, ...)
 - Use the automatic suggestions from Chefkoch
-
-## Get it now:
-
-```
-pip install get-chefkoch
-```
