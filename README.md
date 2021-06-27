@@ -1,4 +1,4 @@
-# get_chefkoch
+# get-chefkoch
 [![Downloads](https://pepy.tech/badge/get-chefkoch)](https://pepy.tech/project/get-chefkoch)
 [![PyPI version](https://badge.fury.io/py/get-chefkoch.svg)](https://badge.fury.io/py/get-chefkoch)
 [![GitHub](https://img.shields.io/github/license/olzeug/get_chefkoch)](https://github.com/olzeug/get_chefkoch/blob/master/LICENSE)
