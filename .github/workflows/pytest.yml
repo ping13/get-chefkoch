@@ -4,6 +4,8 @@
 name: get_chefkoch
 
 on:
+  schedule:
+    - cron: "0 10 * * 1"
   push:
     branches:
       - master
