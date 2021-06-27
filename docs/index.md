@@ -1,9 +1,3 @@
-# get-chefkoch
-[![Downloads](https://pepy.tech/badge/get-chefkoch)](https://pepy.tech/project/get-chefkoch)
-[![PyPI version](https://badge.fury.io/py/get-chefkoch.svg)](https://badge.fury.io/py/get-chefkoch)
-[![GitHub](https://img.shields.io/github/license/olzeug/get_chefkoch)](https://github.com/olzeug/get_chefkoch/blob/master/LICENSE)
-[![Documentation Status](https://readthedocs.org/projects/get-chefkoch/badge/?version=latest)](https://get-chefkoch.readthedocs.io/en/latest/?badge=latest)
-
 Python library to interact with Chefkoch.
 
 ## Installation & Documentation
@@ -12,13 +6,12 @@ pip install get-chefkoch
 ```
 [Documentation](https://get-chefkoch.readthedocs.io/) can be found at Read the Docs.
 
-## Examples:
-
+## Examples
 ```python
 from get_chefkoch import Recipe, Search
 
 s = Search("Apfelstrudel")
-recipe = s.recipes(limit=1)
+recipe = s.recipes(limit=1)[0]
 print(recipe.name)
 print(recipe.description)
 ```
@@ -32,7 +25,7 @@ print(recipe.name)
 print(recipe.description)
 ```
 
-## Recipe-Class Parameters:
+## Recipe-Class Parameters
      name              Name of the recipe
      id                Unique identification of the recipe
      description       Description of the recipe
@@ -45,8 +38,8 @@ print(recipe.description)
      
      Many more parameters are available after calling Recipe().data_dump()
 
-## Features:
 
+## Features
 - Query the recipe of the day
 - Search for specific recipe
 - Querying information about a recipe(cooking time, description, ingredients, ...)

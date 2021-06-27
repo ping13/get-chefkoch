@@ -1,0 +1,6 @@
+site_name: get-chefkoch
+site_url: https://get-chefkoch.readthedocs.io/
+nav:
+    - Home: index.md
+
+theme: readthedocs
