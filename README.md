@@ -18,7 +18,7 @@ pip install get-chefkoch
 from get_chefkoch import Recipe, Search
 
 s = Search("Apfelstrudel")
-recipe = s.recipes(limit=1)
+recipe = s.recipes(limit=1)[0]
 print(recipe.name)
 print(recipe.description)
 ```
