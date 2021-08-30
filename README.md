@@ -1,8 +1,9 @@
 # get-chefkoch
 [![Downloads](https://pepy.tech/badge/get-chefkoch)](https://pepy.tech/project/get-chefkoch)
 [![PyPI version](https://badge.fury.io/py/get-chefkoch.svg)](https://badge.fury.io/py/get-chefkoch)
-[![GitHub](https://img.shields.io/github/license/olzeug/get_chefkoch)](https://github.com/olzeug/get_chefkoch/blob/master/LICENSE)
+[![GitHub](https://img.shields.io/github/license/olzeug/get-chefkoch)](https://github.com/olzeug/get-chefkoch/blob/master/LICENSE)
 [![Documentation Status](https://readthedocs.org/projects/get-chefkoch/badge/?version=latest)](https://get-chefkoch.readthedocs.io/en/latest/?badge=latest)
+[![pytest workflow](https://github.com/olzeug/get-chefkoch/actions/workflows/pytest.yml/badge.svg)](https://github.com/olzeug/get-chefkoch/actions/workflows/pytest.yml)
 
 Python library to interact with Chefkoch.
 
