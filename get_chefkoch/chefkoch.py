@@ -115,18 +115,21 @@ class Recipe:
         soup = BeautifulSoup(req.text, 'html.parser')
         
         scripts = soup.findAll("script", type="application/ld+json")
-        
-        if len(scripts) < 2:
+
+        # find the JSON dictionary in the scripts which is of type Recipe 
+        json_data = None
+        for script_tag in scripts:
+            try:
+                d = json.loads(script_tag.get_text())
+            except json.decoder.JSONDecodeError:
+                pass
+            if d["@type"] == "Recipe":
+                json_data = d
+            
+        if json_data is None:
             raise ParserError("Data section could not be found.")
             
-        
-        data = scripts[1].string
-        
-        try:
-            self.data = json.loads(data)
-        except json.decoder.JSONDecodeError:
-            logging.error(data)
-            raise ParserError(f"Parsed section is not json-decodeable.")
+        self.data = json_data
         
         self._processData()
         self._gotMeta = True
@@ -291,7 +294,8 @@ class Search:
             raise AttributeError("No query argument set.")
         
         args = "&" + self._argsToUrlParams(**args)
-        req = requests.get(self._baseurl + f"api/v2/search-suggestions/combined?t={self.q}{args}")
+        # https://api.chefkoch.de/v2/search/suggestions/recipes?t=&limit=6&format=extended&highlightPreTag=%3Cstrong%3E&highlightPostTag=%3C%2Fstrong%3E
+        req = requests.get(self._baseurl + f"api/v2/search-suggestions/recipes?t={self.q}{args}")
         req.raise_for_status()
         return req.json()
     
